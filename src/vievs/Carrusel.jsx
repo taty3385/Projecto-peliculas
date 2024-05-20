@@ -5,8 +5,8 @@ import { Box, CardActionArea, CardMedia } from "@mui/material";
 import useHome from "../hooks/useHome";
 
 export default function Carrusel() {
-  const { getAllMovies, movies,movieImages } = useHome();
-  console.log(movies);
+  const { getAllMovies, popularMovies, movieImages } = useHome();
+console.log(popularMovies);
 
   useEffect(() => {
     getAllMovies("popular");
@@ -14,15 +14,16 @@ export default function Carrusel() {
   }, []);
 
   return (
-    <Box sx={{ height: "60vh", width: "99%" }}>
+    <Box sx={{ height: "60vh", width: "98vw" }}>
       <Carousel
         autoPlay={true}
         infiniteLoop={true}
         interval={3000}
         showStatus={false}
         showThumbs={false}
+      
       >
-        {movies.map((movie) => (
+        {popularMovies.map((movie) => (
           <Box key={movie.id}>
             <CardActionArea>
             {movieImages[movie.id] && movieImages[movie.id].length > 0 ? (
@@ -47,3 +48,4 @@ export default function Carrusel() {
     </Box>
   );
 }
+
