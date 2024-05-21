@@ -1,6 +1,5 @@
-
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 
 
@@ -49,9 +48,7 @@ export default function useHome() {
   const handleChange = (event, value) => {
     setPage(value);
   };
-  useEffect(() => {
-    setPage(1);
-  }, [totalPage]);
+ 
 
   return { getAllMovies, movies, movieImages, totalPage, page, handleChange };
 }
