@@ -1,17 +1,22 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { styled, alpha } from "@mui/material/styles";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import InputBase from "@mui/material/InputBase";
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+  Typography,
+  InputBase,
+  Menu,
+  MenuItem,
+  Slide,
+} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import Slide from "@mui/material/Slide";
+
+
+
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -66,6 +71,7 @@ const StyledMenu = styled(Menu)(({ theme }) => ({
 export default function Header() {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  const navigate = useNavigate();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -76,7 +82,7 @@ export default function Header() {
   };
 
   const handleCategoryClick = (category) => {
-   
+    navigate(`/category/${category}`);
     handleClose();
   };
 
@@ -134,27 +140,12 @@ export default function Header() {
           transformOrigin={{ vertical: "top", horizontal: "right" }}
         >
           <MenuItem onClick={handleClose}>Buscar</MenuItem>
-          <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
-            <MenuItem onClick={() => handleCategoryClick("now_playing")}>
-              Home
-            </MenuItem>
-          </Link>
-          <Link
-            to="/category/now_playing"
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
-            <MenuItem onClick={() => handleCategoryClick("now_playing")}>
-              Últimos Lanzamientos
-            </MenuItem>
-          </Link>
-          <Link
-            to="/category/popular"
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
-            <MenuItem onClick={() => handleCategoryClick("popular")}>
-              Populares
-            </MenuItem>
-          </Link>
+          <MenuItem onClick={() => handleCategoryClick("now_playing")}>
+            Últimos Lanzamientos
+          </MenuItem>
+          <MenuItem onClick={() => handleCategoryClick("popular")}>
+            Populares
+          </MenuItem>
         </StyledMenu>
       </AppBar>
     </Box>
