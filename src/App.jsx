@@ -14,8 +14,7 @@ function App() {
        <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/category/:type" element={<FilterCategory />} />
-     
-      </Routes>
+     </Routes>
       <Footer />
     </BrowserRouter>
   );
