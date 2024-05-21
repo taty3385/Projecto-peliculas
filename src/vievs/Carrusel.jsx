@@ -11,7 +11,7 @@ export default function Carrusel() {
     getAllMovies("popular");
   }, []);
 
-  console.log(movieImages); 
+ 
 
   return (
     <Box sx={{ height: "60vh", width: "99%" }}>
