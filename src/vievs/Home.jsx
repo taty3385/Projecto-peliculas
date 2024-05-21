@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import Carrusel from './Carrusel';
 import useHome from '../hooks/useHome';
@@ -6,7 +5,7 @@ import { Container, Grid, Typography } from '@mui/material';
 import MovieCard from '../components/MovieCard';
 
 export default function Home() {
-  const { getAllMovies, popularMovies, topRatedMovies } = useHome();
+  const { getAllMovies, movies } = useHome();
 
   useEffect(() => {
     getAllMovies('popular');
@@ -26,7 +25,7 @@ export default function Home() {
           Lo más visto
         </Typography>
         <Grid container spacing={3}>
-          {popularMovies && popularMovies.length > 0 && popularMovies.map((movie) => (
+          {movies && movies.length > 0 && movies.map((movie) => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={movie.id}>
               <MovieCard movie={movie} />
             </Grid>
@@ -38,7 +37,7 @@ export default function Home() {
           Top 10
         </Typography>
         <Grid container spacing={3}>
-          {topRatedMovies && topRatedMovies.length > 0 && topRatedMovies.map((movie) => (
+          {movies && movies.length > 0 && movies.map((movie) => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={movie.id}>
               <MovieCard movie={movie} />
             </Grid>
