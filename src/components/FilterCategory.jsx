@@ -1,6 +1,6 @@
 
 
-import React from 'react';
+
 import { Container, Pagination, Stack, Typography } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import useHome from '../hooks/useHome';
@@ -45,3 +45,4 @@ export default function FilterCategory() {
     </Container>
   );
 }
+

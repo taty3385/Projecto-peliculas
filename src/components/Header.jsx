@@ -14,11 +14,8 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-
 import useHeader from "../hooks/useHeader";
-
-
-
+;
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -72,6 +69,7 @@ const StyledMenu = styled(Menu)(({ theme }) => ({
 
 export default function Header() {
   const { handleClick, handleClose, handleCategoryClick, anchorEl, open } = useHeader();
+ 
 
   return (
     <Box sx={{ width: "100vw" }}>
@@ -127,12 +125,17 @@ export default function Header() {
           transformOrigin={{ vertical: "top", horizontal: "right" }}
         >
           <MenuItem onClick={handleClose}>Buscar</MenuItem>
+          <Link to="category/now_playing">
           <MenuItem onClick={() => handleCategoryClick("now_playing")}>
             Últimos Lanzamientos
           </MenuItem>
+          </Link>
+          <Link to="category/popular">
           <MenuItem onClick={() => handleCategoryClick("popular")}>
+
             Populares
           </MenuItem>
+          </Link>
         </StyledMenu>
       </AppBar>
     </Box>
