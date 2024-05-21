@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+
+import { Link} from "react-router-dom";
 import { styled, alpha } from "@mui/material/styles";
 import {
   AppBar,
@@ -14,6 +14,8 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
+
+import useHeader from "../hooks/useHeader";
 
 
 
@@ -69,22 +71,7 @@ const StyledMenu = styled(Menu)(({ theme }) => ({
 }));
 
 export default function Header() {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-  const navigate = useNavigate();
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const handleCategoryClick = (category) => {
-    navigate(`/category/${category}`);
-    handleClose();
-  };
+  const { handleClick, handleClose, handleCategoryClick, anchorEl, open } = useHeader();
 
   return (
     <Box sx={{ width: "100vw" }}>
