@@ -8,6 +8,7 @@ export default function useHome() {
   const [movieImages, setMovieImages] = useState({});
   const [totalPage, setTotalPage] = useState(0);
   const [page, setPage] = useState(1);
+  const apiKey= "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NjE3MzkyNTMwNmVjY2RhNGNkNzljY2FjMjYxMjk0ZiIsInN1YiI6IjY2M2MwZTQwYTFjN2FkN2Y5MTMzOGEzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GAh4z-ksZTZPe1aDUzRKA9V1jFbEVUTi6wxAysOXSXw"
 
   const getAllMovies = async (type) => {
     try {
@@ -16,8 +17,8 @@ export default function useHome() {
         {
           headers: {
             accept: "application/json",
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NjE3MzkyNTMwNmVjY2RhNGNkNzljY2FjMjYxMjk0ZiIsInN1YiI6IjY2M2MwZTQwYTFjN2FkN2Y5MTMzOGEzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GAh4z-ksZTZPe1aDUzRKA9V1jFbEVUTi6wxAysOXSXw",
+            Authorization: apiKey
+              
           },
         }
       );
@@ -32,8 +33,8 @@ export default function useHome() {
           {
             headers: {
               accept: "application/json",
-              Authorization:
-                "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NjE3MzkyNTMwNmVjY2RhNGNkNzljY2FjMjYxMjk0ZiIsInN1YiI6IjY2M2MwZTQwYTFjN2FkN2Y5MTMzOGEzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GAh4z-ksZTZPe1aDUzRKA9V1jFbEVUTi6wxAysOXSXw",
+              Authorization:apiKey
+                
             },
           }
         );
@@ -50,5 +51,6 @@ export default function useHome() {
   };
  
 
-  return { getAllMovies, movies, movieImages, totalPage, page, handleChange };
+
+  return { getAllMovies, movies, movieImages, totalPage, page, handleChange,apiKey };
 }

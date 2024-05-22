@@ -11,10 +11,17 @@ import {
   Menu,
   MenuItem,
   Slide,
+  Button,
+  Badge,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import useHeader from "../hooks/useHeader";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+
+
+
+
 ;
 
 const Search = styled("div")(({ theme }) => ({
@@ -69,7 +76,7 @@ const StyledMenu = styled(Menu)(({ theme }) => ({
 
 export default function Header() {
   const { handleClick, handleClose, handleCategoryClick, anchorEl, open } = useHeader();
- 
+
 
   return (
     <Box sx={{ width: "100vw" }}>
@@ -111,6 +118,13 @@ export default function Header() {
               inputProps={{ "aria-label": "search" }}
             />
           </Search>
+          <Link to={"/favorite"}>
+            <Button>
+            <Badge color="primary">
+              < FavoriteIcon sx={{color:"red"}} />
+            </Badge>
+            </Button>
+          </Link>
         </Toolbar>
         <StyledMenu
           id="basic-menu"
@@ -149,3 +163,4 @@ export default function Header() {
     </Box>
   );
 }
+
