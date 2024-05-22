@@ -124,7 +124,9 @@ export default function Header() {
           anchorOrigin={{ vertical: "top", horizontal: "right" }}
           transformOrigin={{ vertical: "top", horizontal: "right" }}
         >
-          <MenuItem onClick={handleClose}>Buscar</MenuItem>
+          <Link to="/">
+          <MenuItem onClick={handleClose}>Home</MenuItem>
+          </Link>
           <Link to="category/now_playing">
           <MenuItem onClick={() => handleCategoryClick("now_playing")}>
             Últimos Lanzamientos
@@ -134,6 +136,12 @@ export default function Header() {
           <MenuItem onClick={() => handleCategoryClick("popular")}>
 
             Populares
+          </MenuItem>
+          </Link>
+          <Link to="/search">
+          <MenuItem >
+            busqueda
+            
           </MenuItem>
           </Link>
         </StyledMenu>
