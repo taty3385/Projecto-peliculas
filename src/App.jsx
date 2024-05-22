@@ -4,6 +4,7 @@ import Home from "./vievs/Home";
 import FilterCategory from "./components/FilterCategory";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Detail from "./vievs/Detail";
+import Search from "./vievs/Search";
 
 
 
@@ -15,6 +16,7 @@ function App() {
        <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/category/:type" element={<FilterCategory />} />
+        <Route path="search" element={<Search/>}/>
         <Route path="detail/:idDetail" element={<Detail />} />
         <Route path="*" element={<Error />} />
        </Routes>
