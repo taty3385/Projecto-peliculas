@@ -1,3 +1,5 @@
+
+
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import {
@@ -18,6 +20,7 @@ import {
 import MovieFilterIcon from "@mui/icons-material/MovieFilter";
 import useDetail from "../hooks/useDetail";
 import CloseIcon from "@mui/icons-material/Close";
+import StarIcon from "@mui/icons-material/Star";
 
 export default function Detail() {
   const { idDetail } = useParams();
@@ -58,11 +61,11 @@ export default function Detail() {
           left: 0,
           width: "100vw",
           height: "100%",
-          backgroundColor: "rgba(0, 0, 0, 0.3)",
+          backgroundColor: "rgba(0, 0, 0, 0.5)",
         },
       }}
     >
-      <Container sx={{ display: "flex" }}>
+      <Container sx={{ display: "flex", zIndex: 1 }}>
         <Card
           sx={{
             margin: "10px",
@@ -81,29 +84,46 @@ export default function Detail() {
             )}
           </CardActionArea>
         </Card>
-        <Container>
+        <Container sx={{ padding: 2, borderRadius: 2 }}>
           <Typography
             variant="h3"
             gutterBottom
-            sx={{ zIndex: 3, color: "#fff" }}
+            sx={{ color: "#fff", textShadow: "2px 2px 4px rgba(0, 0, 0, 0.8)" }}
           >
             {movieDetail.title}
           </Typography>
           <Typography
             variant="body1"
             gutterBottom
-            sx={{ zIndex: 3, color: "#fff" }}
+            sx={{ color: "#fff", textShadow: "1px 1px 2px rgba(0, 0, 0, 0.8)" }}
           >
             {movieDetail.overview}
           </Typography>
           {movieDetail.genres && movieDetail.genres.length > 0 && (
             <Box>
-              <Typography variant="body4">Géneros:</Typography>
+              <Typography
+                variant="body4"
+                sx={{ color: "#fff", paddingTop: "10px" }}
+              >
+                Géneros:
+              </Typography>
+
               <List sx={{ padding: 0 }}>
                 {getGenreNames(movieDetail.genres.map((genre) => genre.id)).map(
-                  (genreName, index) => (
-                    <ListItem key={index} sx={{ padding: 1 }}>
-                      <ListItemText>{genreName}</ListItemText>
+                  (genreName, index, array) => (
+                    <ListItem
+                      key={index}
+                      sx={{
+                        padding: 1,
+                        marginTop: index === 0 ? 0 : -1,
+                        marginBottom: index === array.length - 1 ? 0 : -1,
+                      }}
+                    >
+                      <StarIcon sx={{ color: "#fff", marginRight: 1 }} />{" "}
+                     
+                      <ListItemText sx={{ color: "#fff" }}>
+                        {genreName}
+                      </ListItemText>
                     </ListItem>
                   )
                 )}

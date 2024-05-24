@@ -1,5 +1,4 @@
-
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { styled, alpha } from "@mui/material/styles";
 import {
   AppBar,
@@ -18,13 +17,11 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import useHeader from "../hooks/useHeader";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import useSeach from "../hooks/useSeach";
+import { useContext } from "react";
+import { FavoriteContext } from "../components/context/FavoriteContext";
 
-
-
-
-;
-
-const Search = styled("div")(({ theme }) => ({
+const SearchWrapper = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
@@ -68,15 +65,17 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const StyledMenu = styled(Menu)(({ theme }) => ({
   "& .MuiPaper-root": {
     backgroundColor: "black",
-    color: "white", 
+    color: "white",
     width: "20vw",
     height: "100vh",
   },
 }));
 
 export default function Header() {
-  const { handleClick, handleClose, handleCategoryClick, anchorEl, open } = useHeader();
-
+  const { handleClick, handleClose, handleCategoryClick, anchorEl, open } =
+    useHeader();
+  const { searchQuery, handleSearchChange } = useSeach();
+  const { totalFavorite } = useContext(FavoriteContext);
 
   return (
     <Box sx={{ width: "100vw" }}>
@@ -109,20 +108,22 @@ export default function Header() {
               Home
             </Typography>
           </Link>
-          <Search>
+          <SearchWrapper>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Buscar…"
               inputProps={{ "aria-label": "search" }}
+              value={searchQuery}
+              onChange={handleSearchChange}
             />
-          </Search>
+          </SearchWrapper>
           <Link to={"/favorite"}>
             <Button>
-            <Badge color="primary">
-              < FavoriteIcon sx={{color:"red"}} />
-            </Badge>
+              <Badge color="primary" badgeContent={totalFavorite()}>
+                <FavoriteIcon sx={{ color: "red" }} />
+              </Badge>
             </Button>
           </Link>
         </Toolbar>
@@ -139,28 +140,23 @@ export default function Header() {
           transformOrigin={{ vertical: "top", horizontal: "right" }}
         >
           <Link to="/">
-          <MenuItem onClick={handleClose}>Home</MenuItem>
+            <MenuItem onClick={handleClose}>Home</MenuItem>
           </Link>
           <Link to="category/now_playing">
-          <MenuItem onClick={() => handleCategoryClick("now_playing")}>
-            Últimos Lanzamientos
-          </MenuItem>
+            <MenuItem onClick={() => handleCategoryClick("now_playing")}>
+              Últimos Lanzamientos
+            </MenuItem>
           </Link>
           <Link to="category/popular">
-          <MenuItem onClick={() => handleCategoryClick("popular")}>
-
-            Populares
-          </MenuItem>
+            <MenuItem onClick={() => handleCategoryClick("popular")}>
+              Populares
+            </MenuItem>
           </Link>
           <Link to="/search">
-          <MenuItem >
-            busqueda
-            
-          </MenuItem>
+            <MenuItem>búsqueda</MenuItem>
           </Link>
         </StyledMenu>
       </AppBar>
     </Box>
   );
 }
-
