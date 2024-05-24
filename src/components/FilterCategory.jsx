@@ -1,7 +1,7 @@
 
 
 
-import { Container, Pagination, Stack, Typography, Grid } from '@mui/material';
+import { Container, Pagination, Stack, Typography, Grid, CircularProgress } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import useHome from '../hooks/useHome';
 import MovieCard from './MovieCard';
@@ -14,6 +14,22 @@ export default function FilterCategory() {
   useEffect(() => {
     getAllMovies(type);
   }, [type, page]);
+
+  if (movies.length === 0) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "100vh",
+        
+        }}
+      >
+        <CircularProgress sx={{color:"red"}} />
+      </div>
+    );
+  }
 
   return (
     <Container>
