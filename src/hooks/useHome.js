@@ -1,8 +1,6 @@
+
 import axios from "axios";
 import { useState } from "react";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 
 export default function useHome() {
   const [movies, setMovies] = useState([]);
@@ -14,7 +12,6 @@ export default function useHome() {
     "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NjE3MzkyNTMwNmVjY2RhNGNkNzljY2FjMjYxMjk0ZiIsInN1YiI6IjY2M2MwZTQwYTFjN2FkN2Y5MTMzOGEzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GAh4z-ksZTZPe1aDUzRKA9V1jFbEVUTi6wxAysOXSXw";
 
   const getAllMovies = async (type) => {
-
     try {
       const response = await axios.get(
         `https://api.themoviedb.org/3/movie/${type}?language=es-ES&page=${page}`,
@@ -28,7 +25,6 @@ export default function useHome() {
       setMovies(response.data.results);
       setTotalPage(response.data.total_pages);
       setTop10(response.data.results)
-      
       const imagesData = {};
       for (const movie of response.data.results) {
         const imageResponse = await axios.get(
@@ -63,13 +59,12 @@ export default function useHome() {
           },
         }
       );
-      console.log(response.data.results);
       setTop10(response.data.results);
     } catch (error) {
       console.error("Error fetching top 10 movies:", error);
     }
   };
- 
+
   return {
     getAllMovies,
     movies,
@@ -80,6 +75,5 @@ export default function useHome() {
     apiKey,
     getTop10,
     top10,
-  
   };
 }

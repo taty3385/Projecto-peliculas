@@ -19,7 +19,7 @@ const MovieCard = ({ movie }) => {
           <CardMedia
             component="img"
             height="300"
-            image={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : placeholderImage}
+            image={movie.poster_path ? `https://image.tmdb.org/t/p/w300${movie.poster_path}` : placeholderImage}
             alt={movie.title}
           />
         </Link>

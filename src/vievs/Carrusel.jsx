@@ -1,26 +1,35 @@
+
 import React, { useEffect } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Box, CardActionArea, CardMedia } from "@mui/material";
+import { Box, CardActionArea, CardMedia, CircularProgress } from "@mui/material";
 import useHome from "../hooks/useHome";
 
-export default function Carrusel() {
+export default function CarruselPlay() {
   const { getAllMovies, movies, movieImages } = useHome();
 
   useEffect(() => {
-    getAllMovies("popular");
+    getAllMovies("now_playing");
   }, []);
 
- 
+  if (movies.length === 0) {
+    return (
+      <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: "60vh" }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
 
   return (
-    <Box sx={{ height: "60vh", width: "99%" }}>
+    <Box sx={{ height: "60vh", width: "100%" }}>
       <Carousel
-        autoPlay={true}
-        infiniteLoop={true}
+        autoPlay
+        infiniteLoop
         interval={3000}
         showStatus={false}
         showThumbs={false}
+        showArrows
+        emulateTouch
       >
         {movies.map((movie) => (
           <div key={movie.id}>
@@ -29,14 +38,12 @@ export default function Carrusel() {
                 <CardMedia
                   component="img"
                   sx={{
-                    height: "56vh",
+                    height: { xs: "30vh", sm: "40vh", md: "50vh", lg: "56vh" },
                     width: "100%",
                     objectPosition: "50% 30%",
                     objectFit: "cover",
                   }}
-                  image={`https://image.tmdb.org/t/p/original${
-                    movieImages[movie.id][0].file_path
-                  }`}
+                  image={`https://image.tmdb.org/t/p/original${movieImages[movie.id][0].file_path}`}
                   alt={movie.title}
                 />
               ) : (
