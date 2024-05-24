@@ -6,7 +6,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Detail from "./vievs/Detail";
 import Search from "./vievs/Search";
 import FavoriteContextProvider from "./components/context/FavoriteContext";
-import Favorite from "@mui/icons-material/Favorite";
+import Favorite from "./components/Favorite";
 
 
 
@@ -21,7 +21,7 @@ function App() {
         <Route path="/category/:type" element={<FilterCategory />} />
         <Route path="search" element={<Search/>}/>
         <Route path="detail/:idDetail" element={<Detail />} />
-        <Route path="detail/:idDetail" element={<Favorite />} />
+        <Route path="/favorite" element={<Favorite />} />
 
         <Route path="*" element={<Error />} />
        </Routes>

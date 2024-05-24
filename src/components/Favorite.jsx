@@ -6,6 +6,7 @@ import MovieCard from "./MovieCard";
 
 export default function Favorite() {
   const { favorites } = useContext(FavoriteContext);
+  console.log(favorites);
   return (
     <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", minHeight: "100vh" }}>
       <Box sx={{ flexGrow: 1 }}>
