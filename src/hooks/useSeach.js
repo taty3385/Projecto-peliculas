@@ -1,11 +1,10 @@
 // hooks/useSeach.js
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
-export default function useSeach() {
-    const [searchQuery, setSearchQuery] = useState(""); 
+export default function useSearch() {
+
    const [searchResults, setSearchResults] = useState([]);
-    const navigate = useNavigate();
+
 
     const fetchMovies = async (query) => {
         try {
@@ -24,21 +23,17 @@ export default function useSeach() {
 
             setSearchResults(data.results); 
 
-            navigate("/search", { state: { searchResults: data.results } });
         } catch (error) {
             console.error("Error fetching movies:", error);
         }
     };
 
-    const handleSearchChange = (event) => {
-        const { value } = event.target;
-        setSearchQuery(value); 
-    };
+  
 
     return {
-        searchQuery,
+  
         searchResults,
         fetchMovies,
-        handleSearchChange
+    
     }
 }
