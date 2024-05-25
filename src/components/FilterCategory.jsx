@@ -7,12 +7,12 @@ import useHome from '../hooks/useHome';
 import MovieCard from './MovieCard';
 import { useEffect } from 'react';
 
-export default function FilterCategory() {
+export default function FilterCategory({handleChange,page}) {
   const { type } = useParams();
-  const { movies, totalPage, page, handleChange, getAllMovies } = useHome();
+  const { movies, totalPage, getAllMovies } = useHome();
 
   useEffect(() => {
-    getAllMovies(type);
+    getAllMovies(type,page);
   }, [type, page]);
 
   if (movies.length === 0) {

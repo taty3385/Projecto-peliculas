@@ -6,12 +6,12 @@ export default function useHome() {
   const [movies, setMovies] = useState([]);
   const [movieImages, setMovieImages] = useState({});
   const [totalPage, setTotalPage] = useState(0);
-  const [page, setPage] = useState(1);
+
   const [top10, setTop10] = useState([]);
   const apiKey =
     "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NjE3MzkyNTMwNmVjY2RhNGNkNzljY2FjMjYxMjk0ZiIsInN1YiI6IjY2M2MwZTQwYTFjN2FkN2Y5MTMzOGEzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GAh4z-ksZTZPe1aDUzRKA9V1jFbEVUTi6wxAysOXSXw";
 
-  const getAllMovies = async (type) => {
+  const getAllMovies = async (type, page=1) => {
     try {
       const response = await axios.get(
         `https://api.themoviedb.org/3/movie/${type}?language=es-ES&page=${page}`,
@@ -44,9 +44,6 @@ export default function useHome() {
     }
   };
 
-  const handleChange = (event, value) => {
-    setPage(value);
-  };
 
   const getTop10 = async () => {
     try {
@@ -70,8 +67,8 @@ export default function useHome() {
     movies,
     movieImages,
     totalPage,
-    page,
-    handleChange,
+   
+   
     apiKey,
     getTop10,
     top10,
