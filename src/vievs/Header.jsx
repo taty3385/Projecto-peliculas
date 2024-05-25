@@ -62,13 +62,14 @@ const StyledMenu = styled(Menu)(({ theme }) => ({
 }));
 
 export default function Header({searchQuery,handleSearchChange}) {
+  const navigate = useNavigate();
   const { handleClick, handleClose, handleCategoryClick, anchorEl, open } = useHeader();
  const { totalFavorite } = useContext(FavoriteContext);
- const navigate = useNavigate();
+
 
   useEffect(() => {
     if (searchQuery.length > 0) {
-      Navigate("/search");
+    navigate("/search");
     } else {
       navigate("/");
     }

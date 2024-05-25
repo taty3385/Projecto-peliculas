@@ -2,8 +2,7 @@
 import React, { useState } from 'react';
 
 export default function useSearch() {
-
-   const [searchResults, setSearchResults] = useState([]);
+ const [searchResults, setSearchResults] = useState([]);
 
 
     const fetchMovies = async (query) => {

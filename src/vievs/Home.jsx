@@ -62,6 +62,7 @@ export default function Home() {
         mouseTracking
         renderPrevButton={renderPrevButton}
         renderNextButton={renderNextButton}
+        
       >
         {movies.map((movie) => (
           <div key={movie.id} style={{ margin: "0 10px", width: "90%" }}>
