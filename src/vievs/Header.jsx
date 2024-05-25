@@ -1,25 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { styled, alpha } from "@mui/material/styles";
-import {
-  AppBar,
-  Box,
-  Toolbar,
-  IconButton,
-  Typography,
-  InputBase,
-  Menu,
-  MenuItem,
-  Slide,
-  Button,
-  Badge,
-} from "@mui/material";
+import { AppBar, Box, Toolbar, IconButton, Typography, InputBase, Menu, MenuItem, Slide, Button, Badge,} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import useHeader from "../hooks/useHeader";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import useSeach from "../hooks/useSeach";
-import { useContext } from "react";
+import { useNavigate } from 'react-router-dom';
+import { useContext, useEffect } from "react";
 import { FavoriteContext } from "../components/context/FavoriteContext";
+
+
 
 const SearchWrapper = styled("div")(({ theme }) => ({
   position: "relative",
@@ -71,11 +61,18 @@ const StyledMenu = styled(Menu)(({ theme }) => ({
   },
 }));
 
-export default function Header() {
-  const { handleClick, handleClose, handleCategoryClick, anchorEl, open } =
-    useHeader();
-  const { searchQuery, handleSearchChange } = useSeach();
-  const { totalFavorite } = useContext(FavoriteContext);
+export default function Header({searchQuery,handleSearchChange}) {
+  const { handleClick, handleClose, handleCategoryClick, anchorEl, open } = useHeader();
+ const { totalFavorite } = useContext(FavoriteContext);
+ const navigate = useNavigate();
+
+  useEffect(() => {
+    if (searchQuery.length > 0) {
+      Navigate("/search");
+    } else {
+      navigate("/");
+    }
+  }, [searchQuery]);
 
   return (
     <Box sx={{ width: "100vw" }}>
