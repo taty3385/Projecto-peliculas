@@ -8,15 +8,14 @@ import { FavoriteContext } from "./context/FavoriteContext";
 
 const MovieCard = ({ movie }) => {
 
-
-  const { addFavorite, removeFavorite, isFavorite } = useContext(FavoriteContext);
-  const placeholderImage = "https://azure.wgp-cdn.co.uk/app-family-tree/posts/nypl_digitalcollections_b5cfbf49-a5a0-7548-e040-e00a18060aef_001_q.jpg";
+const { addFavorite, removeFavorite, isFavorite } = useContext(FavoriteContext);
+const placeholderImage = "https://azure.wgp-cdn.co.uk/app-family-tree/posts/nypl_digitalcollections_b5cfbf49-a5a0-7548-e040-e00a18060aef_001_q.jpg";
 
   return (
     <Card sx={{
-      margin: "15px", 
+      margin: "5px", 
       boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)", 
-      width: "40vh", 
+      width: "30vh", 
       position: "relative",
       transition: "transform 0.3s ease", 
       "&:hover": {
@@ -27,7 +26,7 @@ const MovieCard = ({ movie }) => {
         <Link to={`/detail/${movie.id}`}>
           <CardMedia
             component="img"
-            height="300"
+            height="200"
             image={movie.poster_path ? `https://image.tmdb.org/t/p/w300${movie.poster_path}` : placeholderImage}
             alt={movie.title}
           />
