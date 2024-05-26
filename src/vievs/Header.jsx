@@ -56,7 +56,7 @@ const StyledMenu = styled(Menu)(({ theme }) => ({
   "& .MuiPaper-root": {
     backgroundColor: "black",
     color: "white",
-    width: "20vw",
+    width: "30%",
     height: "100vh",
   },
 }));
@@ -76,7 +76,7 @@ export default function Header({searchQuery,handleSearchChange}) {
   }, [searchQuery]);
 
   return (
-    <Box sx={{ width: "100vw" }}>
+    <Box sx={{ width: "100%" }}>
       <AppBar
         position="static"
         sx={{ color: "white", backgroundColor: "gray" }}

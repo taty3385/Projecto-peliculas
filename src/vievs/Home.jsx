@@ -1,8 +1,7 @@
-
 import React, { useEffect } from "react";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
-import { Box, IconButton } from "@mui/material";
+import { Box, Container, IconButton, Typography } from "@mui/material";
 import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 import useHome from "../hooks/useHome";
 import MovieCard from "../components/MovieCard";
@@ -17,8 +16,10 @@ export default function Home() {
   }, []);
 
   const responsive = {
-    0: { items: 1 },
-    568: { items: 2 },
+    421: { items: 2 },
+    537: { items: 2 },
+    628:{ items: 2 },
+    725: { items: 3 },
     1024: { items: 3 },
     1200: { items: 4 },
   };
@@ -54,40 +55,54 @@ export default function Home() {
   );
 
   return (
+
     <Box>
-       <CarruselPlay />
-    <Box  sx={{ maxWidth: "180vh", margin: "0 auto", position: "relative" }}>
-     
-      <AliceCarousel
-        infinite
-        responsive={responsive}
-        mouseTracking
-        renderPrevButton={renderPrevButton}
-        renderNextButton={renderNextButton}
-        dotsDisabled={false}
-        sx={{width:"100%"}}
-        >
-        {movies.map((movie) => (
-          <div key={movie.id} style={{  width: "40vw" }}>
-            <MovieCard movie={movie} />
-          </div>
-        ))}
-      </AliceCarousel>
-      <AliceCarousel
-        infinite
-        responsive={responsive}
-        mouseTracking
-        renderPrevButton={renderPrevButton}
-        renderNextButton={renderNextButton}
-        dotsDisabled={true}
-      >
-        {top10.map((movie) => (
-          <div key={movie.id} style={{ margin: "0 10px", width: "30vw" }}>
-            <MovieCard movie={movie} />
-          </div>
-        ))}
-      </AliceCarousel>
+      <CarruselPlay />
+      <Box sx={{ maxWidth: "100vw", margin: "5px",/* backgroundColor: "blue" */}}>
+        <Container sx={{ Width: "90vh",/* backgroundColor: "red"*/  }}>
+        <Typography variant="h5" gutterBottom> Más populares</Typography>
+          <AliceCarousel
+            infinite
+            responsive={responsive}
+            mouseTracking
+            renderPrevButton={renderPrevButton}
+            renderNextButton={renderNextButton}
+            dotsDisabled={false}
+            disableDotsControls={true} 
+          
+            mouseDragEnabled={false}
+            sx={{ width: "100%"}}
+          >
+            {movies.map((movie) => (
+              <div key={movie.id} sx={{ width: "50vw",margin: "0 auto" }}>
+                <MovieCard movie={movie} />
+              </div>
+            ))}
+          </AliceCarousel>
+        </Container>
+        <Container sx={{ Width: "90vh", /*backgroundColor: "red"*/ }}>
+        <Typography variant="h5" gutterBottom>  Top 10 más vistos</Typography>
+          <AliceCarousel
+            infinite
+            responsive={responsive}
+            mouseTracking
+            renderPrevButton={renderPrevButton}
+            renderNextButton={renderNextButton}
+            dotsDisabled={false} 
+           disableDotsControls={true} 
+          >
+            {top10.map((movie) => (
+              <div key={movie.id} style={{ margin: "0 10px", width: "40vw" }}>
+                <MovieCard movie={movie} />
+              </div>
+            ))}
+          </AliceCarousel>
+        </Container>
+      </Box>
     </Box>
-    </Box>
+   
+
+
+
   );
 }
