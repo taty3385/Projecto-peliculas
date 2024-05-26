@@ -54,17 +54,21 @@ export default function Home() {
   );
 
   return (
-    <Box sx={{ maxWidth: "199vh", margin: "0 auto", position: "relative" }}>
-      <CarruselPlay />
+    <Box>
+       <CarruselPlay />
+    <Box  sx={{ maxWidth: "180vh", margin: "0 auto", position: "relative" }}>
+     
       <AliceCarousel
         infinite
         responsive={responsive}
         mouseTracking
         renderPrevButton={renderPrevButton}
         renderNextButton={renderNextButton}
-      >
+        dotsDisabled={false}
+        sx={{width:"100%"}}
+        >
         {movies.map((movie) => (
-          <div key={movie.id} style={{ margin: "0 10px", width: "90%" }}>
+          <div key={movie.id} style={{  width: "40vw" }}>
             <MovieCard movie={movie} />
           </div>
         ))}
@@ -75,13 +79,15 @@ export default function Home() {
         mouseTracking
         renderPrevButton={renderPrevButton}
         renderNextButton={renderNextButton}
+        dotsDisabled={true}
       >
         {top10.map((movie) => (
-          <div key={movie.id} style={{ margin: "0 10px", width: "90%" }}>
+          <div key={movie.id} style={{ margin: "0 10px", width: "30vw" }}>
             <MovieCard movie={movie} />
           </div>
         ))}
       </AliceCarousel>
+    </Box>
     </Box>
   );
 }

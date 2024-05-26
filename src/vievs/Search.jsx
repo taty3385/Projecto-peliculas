@@ -1,15 +1,17 @@
-import React, { useEffect } from "react";
-import {Card,CardMedia,CardContent,Box,Container,Typography,  Grid,} from "@mui/material";
-import useSearch from "../hooks/useSeach";
 
-export default function Search({ searchQuery }) {
-  const { searchResults, fetchMovies } = useSearch();
+import React, { useEffect } from "react";
+import { Box, Container, Typography, Grid, Pagination, Stack } from "@mui/material";
+import useSearch from "../hooks/useSeach";
+import MovieCard from "../components/MovieCard";
+import useHome from "../hooks/useHome";
+
+export default function Search({ searchQuery, page }) {
+  const { searchResults, fetchMovies, totalPages } = useSearch();
+  const { handleChange } = useHome();
 
   useEffect(() => {
-    if (searchQuery.length > 0) {
-      fetchMovies(searchQuery);
-    }
-  }, [searchQuery]);
+    fetchMovies(searchQuery, page);
+  }, [searchQuery, page]);
 
   return (
     <Box
@@ -30,27 +32,19 @@ export default function Search({ searchQuery }) {
         {searchResults.length > 0 ? (
           <Grid container spacing={3}>
             {searchResults.map((movie) => (
-              <Grid item xs={12} sm={6} md={4} lg={3} key={movie.id}>
-                <Card sx={{ maxWidth: 300, margin: 2 }}>
-                  <CardMedia
-                    component="img"
-                    height="400"
-                    image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                    alt={movie.title}
-                  />
-                  <CardContent>
-                    <Typography variant="h6" component="div">
-                      {movie.title}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
+              <MovieCard key={movie.id} movie={movie} />
             ))}
           </Grid>
         ) : (
           <Typography variant="body1">No se encontraron resultados.</Typography>
         )}
       </Box>
+      
+      {searchResults.length > 0 && (
+        <Stack>
+          <Pagination count={totalPages} page={page} onChange={handleChange} />
+        </Stack>
+      )}
     </Box>
   );
 }

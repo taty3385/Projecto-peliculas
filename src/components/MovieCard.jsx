@@ -13,7 +13,16 @@ const MovieCard = ({ movie }) => {
   const placeholderImage = "https://azure.wgp-cdn.co.uk/app-family-tree/posts/nypl_digitalcollections_b5cfbf49-a5a0-7548-e040-e00a18060aef_001_q.jpg";
 
   return (
-    <Card sx={{ margin: "10px", boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)", width: 200, position: "relative" }}>
+    <Card sx={{
+      margin: "15px", 
+      boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)", 
+      width: "40vh", 
+      position: "relative",
+      transition: "transform 0.3s ease", 
+      "&:hover": {
+        transform: "translateY(-15px)",
+      }
+    }}>
       <CardActionArea>
         <Link to={`/detail/${movie.id}`}>
           <CardMedia
@@ -23,8 +32,8 @@ const MovieCard = ({ movie }) => {
             alt={movie.title}
           />
         </Link>
-        <CardContent>
-          <Typography gutterBottom variant="h7" component="div">
+        <CardContent sx={{ backgroundColor: 'rgba(0, 0, 0, 0.4)', padding: '5px' , height:"10vh", display:"flex" , justifyContent:"center" ,alignItems:"center" }}>
+          <Typography gutterBottom variant="h7" component="div"sx={{color:"white"}} >
             {movie.title}
           </Typography>
         </CardContent>
