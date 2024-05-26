@@ -1,8 +1,12 @@
-
 import React, { useEffect } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Box, CardActionArea, CardMedia, CircularProgress } from "@mui/material";
+import {
+  Box,
+  CardActionArea,
+  CardMedia,
+  CircularProgress,
+} from "@mui/material";
 import useHome from "../hooks/useHome";
 
 export default function CarruselPlay() {
@@ -14,14 +18,27 @@ export default function CarruselPlay() {
 
   if (movies.length === 0) {
     return (
-      <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: "60vh" }}>
-        <CircularProgress />
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "60vh",
+        }}
+      >
+        <CircularProgress sx={{ color: "red" }} />
       </Box>
     );
   }
 
   return (
-    <Box sx={{ height: "60vh", width: "100%" }}>
+    <Box
+      className="carrusel"
+      sx={{
+        height: "60vh",
+        width: "100%",
+      }}
+    >
       <Carousel
         autoPlay
         infiniteLoop
@@ -38,12 +55,20 @@ export default function CarruselPlay() {
                 <CardMedia
                   component="img"
                   sx={{
-                    height: { xs: "30vh", sm: "40vh", md: "50vh", lg: "56vh" },
+                    height: {
+                      xs: "30vh",
+                      sm: "40vh",
+                      md: "50vh",
+                      lg: "56vh",
+                      "@media (max-width: 581px)": { height: "60vh" },
+                    },
                     width: "100%",
                     objectPosition: "50% 30%",
                     objectFit: "cover",
                   }}
-                  image={`https://image.tmdb.org/t/p/original${movieImages[movie.id][0].file_path}`}
+                  image={`https://image.tmdb.org/t/p/original${
+                    movieImages[movie.id][0].file_path
+                  }`}
                   alt={movie.title}
                 />
               ) : (

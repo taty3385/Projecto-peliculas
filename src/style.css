@@ -1,1 +1,5 @@
-@media
+@media(max-width:581px){
+    .carrusel{
+        height: 80vh;
+    }
+}
