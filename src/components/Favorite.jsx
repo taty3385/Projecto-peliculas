@@ -1,4 +1,3 @@
-
 import React, { useContext } from "react";
 import { FavoriteContext } from "./context/FavoriteContext";
 import { Box, Typography } from "@mui/material";
@@ -6,9 +5,8 @@ import MovieCard from "./MovieCard";
 
 export default function Favorite() {
   const { favorites } = useContext(FavoriteContext);
-  console.log(favorites);
+ 
   return (
-
     <Box
       sx={{
         display: "flex",
@@ -36,14 +34,13 @@ export default function Favorite() {
             <MovieCard
               key={favorite.id}
               movie={favorite}
-
               sx={{ margin: "auto" }} 
-
             />
           ))}
-
         </Box>
-      </Box>
+      ) : (
+        <Typography variant="body1">No tienes favoritos aún.</Typography>
+      )}
     </Box>
   );
 }
