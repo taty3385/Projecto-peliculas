@@ -1,35 +1,37 @@
 import { Link } from "react-router-dom";
 
-import {
-  AppBar,
-  Box,
-  Toolbar,
-  IconButton,
-  Typography,
-
-  MenuItem,
-  Slide,
-  Button,
-  Badge,
-} from "@mui/material";
+import { AppBar, Box, Toolbar, IconButton, Typography, MenuItem, Slide,  Button, Badge, Dialog, DialogTitle, DialogContent, DialogActions} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import useHeader from "../hooks/useHeader";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useNavigate } from "react-router-dom";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FavoriteContext } from "../components/context/FavoriteContext";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import NewReleasesIcon from "@mui/icons-material/NewReleases";
 import HomeIcon from "@mui/icons-material/Home";
 import { SearchWrapper, SearchIconWrapper, StyledInputBase, StyledMenu } from "./styles"
+import MovieCard from "../components/MovieCard";
 
 
 export default function Header({ searchQuery, handleSearchChange }) {
   const navigate = useNavigate();
   const { handleClick, handleClose, handleCategoryClick, anchorEl, open } =
     useHeader();
-  const { totalFavorite } = useContext(FavoriteContext);
+    const [modalOpen, setModalOpen] = useState(false);
+    const { favorites, totalFavorite } = useContext(FavoriteContext);
+     
+    
+   
+    const handleModalOpen = () => {
+        setModalOpen(true);
+      };
+    
+      const handleModalClose = () => {
+        setModalOpen(false);
+      };
+ 
 
   useEffect(() => {
     if (searchQuery.length > 0) {
@@ -81,13 +83,13 @@ export default function Header({ searchQuery, handleSearchChange }) {
               onChange={handleSearchChange}
             />
           </SearchWrapper>
-          <Link to={"/favorite"}>
-            <Button>
+         
+            <Button onClick={handleModalOpen}>
               <Badge color="primary" badgeContent={totalFavorite()}>
                 <FavoriteIcon sx={{ color: "red" }} />
               </Badge>
             </Button>
-          </Link>
+         
         </Toolbar>
         <StyledMenu
           id="basic-menu"
@@ -129,6 +131,34 @@ export default function Header({ searchQuery, handleSearchChange }) {
           </Link>
         </StyledMenu>
       </AppBar>
+      <Dialog open={modalOpen} onClose={handleModalClose} fullWidth maxWidth="md">
+        <DialogTitle>Mis Favoritos</DialogTitle>
+        <DialogContent>
+          {favorites?.length > 0 ? (
+            <Box
+              sx={{
+                display: "flex",
+                flexWrap: "wrap",
+                justifyContent: "space-around",
+                gap: 2,
+                width: "100%",
+              }}
+            >
+              {favorites.map((favorite) => (
+                <MovieCard key={favorite.id} movie={favorite} sx={{ margin: "auto" }} />
+              ))}
+            </Box>
+          ) : (
+            <Typography variant="body1">No hay favoritos seleccionados</Typography>
+          )}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleModalClose} color="primary">
+            Cerrar
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 }
+

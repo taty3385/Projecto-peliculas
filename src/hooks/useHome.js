@@ -8,8 +8,8 @@ export default function useHome() {
   const [totalPage, setTotalPage] = useState(0);
 
   const [top10, setTop10] = useState([]);
-  const apiKey =
-    "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NjE3MzkyNTMwNmVjY2RhNGNkNzljY2FjMjYxMjk0ZiIsInN1YiI6IjY2M2MwZTQwYTFjN2FkN2Y5MTMzOGEzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GAh4z-ksZTZPe1aDUzRKA9V1jFbEVUTi6wxAysOXSXw";
+  const API_KEY = import.meta.env.VITE_API_KEY;
+    // "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NjE3MzkyNTMwNmVjY2RhNGNkNzljY2FjMjYxMjk0ZiIsInN1YiI6IjY2M2MwZTQwYTFjN2FkN2Y5MTMzOGEzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GAh4z-ksZTZPe1aDUzRKA9V1jFbEVUTi6wxAysOXSXw";
 
   const getAllMovies = async (type, page=1) => {
     try {
@@ -18,7 +18,7 @@ export default function useHome() {
         {
           headers: {
             accept: "application/json",
-            Authorization: apiKey,
+            Authorization:  `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NjE3MzkyNTMwNmVjY2RhNGNkNzljY2FjMjYxMjk0ZiIsInN1YiI6IjY2M2MwZTQwYTFjN2FkN2Y5MTMzOGEzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GAh4z-ksZTZPe1aDUzRKA9V1jFbEVUTi6wxAysOXSXw`
           },
         }
       );
@@ -26,13 +26,16 @@ export default function useHome() {
       setTotalPage(response.data.total_pages);
       setTop10(response.data.results)
       const imagesData = {};
+
+
+
       for (const movie of response.data.results) {
         const imageResponse = await axios.get(
           `https://api.themoviedb.org/3/movie/${movie.id}/images`,
           {
             headers: {
               accept: "application/json",
-              Authorization: apiKey,
+              Authorization: "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NjE3MzkyNTMwNmVjY2RhNGNkNzljY2FjMjYxMjk0ZiIsInN1YiI6IjY2M2MwZTQwYTFjN2FkN2Y5MTMzOGEzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GAh4z-ksZTZPe1aDUzRKA9V1jFbEVUTi6wxAysOXSXw"
             },
           }
         );
@@ -52,7 +55,7 @@ export default function useHome() {
         {
           headers: {
             accept: "application/json",
-            Authorization: apiKey,
+            Authorization: "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NjE3MzkyNTMwNmVjY2RhNGNkNzljY2FjMjYxMjk0ZiIsInN1YiI6IjY2M2MwZTQwYTFjN2FkN2Y5MTMzOGEzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GAh4z-ksZTZPe1aDUzRKA9V1jFbEVUTi6wxAysOXSXw",
           },
         }
       );
@@ -68,8 +71,6 @@ export default function useHome() {
     movieImages,
     totalPage,
    
-   
-    apiKey,
     getTop10,
     top10,
   };

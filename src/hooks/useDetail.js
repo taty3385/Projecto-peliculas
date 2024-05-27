@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import useHome from './useHome';
+
 
 export default function Detail() {
   
@@ -10,7 +10,7 @@ const [movieDetail, setMovieDetail] = useState({});
   const [trailerUrl, setTrailerUrl] = useState("");
   const [open, setOpen] = useState(false);
   const { idDetail } = useParams();
-  const {apiKey}=useHome()
+  const API_KEY = import.meta.env.VITE_API_KEY;
 
   const getMovieDetail = async () => {
     try {
@@ -19,7 +19,7 @@ const [movieDetail, setMovieDetail] = useState({});
         {
           headers: {
             accept: 'application/json',
-            Authorization: apiKey
+            Authorization:  "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NjE3MzkyNTMwNmVjY2RhNGNkNzljY2FjMjYxMjk0ZiIsInN1YiI6IjY2M2MwZTQwYTFjN2FkN2Y5MTMzOGEzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GAh4z-ksZTZPe1aDUzRKA9V1jFbEVUTi6wxAysOXSXw",
           },
         }
       );
@@ -30,7 +30,7 @@ const [movieDetail, setMovieDetail] = useState({});
         {
           headers: {
             accept: "application/json",
-            Authorization: apiKey
+            Authorization:  `Bearer ${API_KEY}`
           },
         }
       );
@@ -56,7 +56,7 @@ const [movieDetail, setMovieDetail] = useState({});
         {
           headers: {
             accept: "application/json",
-            Authorization: apiKey
+            Authorization: "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NjE3MzkyNTMwNmVjY2RhNGNkNzljY2FjMjYxMjk0ZiIsInN1YiI6IjY2M2MwZTQwYTFjN2FkN2Y5MTMzOGEzOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GAh4z-ksZTZPe1aDUzRKA9V1jFbEVUTi6wxAysOXSXw",
           },
         }
       );
