@@ -36,7 +36,9 @@ export default function Favorite() {
             <MovieCard
               key={favorite.id}
               movie={favorite}
+
               sx={{ margin: "auto" }} 
+
             />
           ))}
 
