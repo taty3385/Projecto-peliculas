@@ -1,16 +1,17 @@
 
 import React, { useEffect } from "react";
-import { Box, Container, Typography, Grid} from "@mui/material";
+import { Box, Container, Typography, Grid, Pagination, Stack } from "@mui/material";
 import useSearch from "../hooks/useSeach";
 import MovieCard from "../components/MovieCard";
+import useHome from "../hooks/useHome";
 
-
-export default function Search({ searchQuery }) {
-  const { searchResults, fetchMovies, } = useSearch();
+export default function Search({ searchQuery, page }) {
+  const { searchResults, fetchMovies, totalPages } = useSearch();
+  const { handleChange } = useHome();
 
   useEffect(() => {
-    fetchMovies(searchQuery);
-  }, [searchQuery]);
+    fetchMovies(searchQuery, page);
+  }, [searchQuery, page]);
 
   return (
     <Box
@@ -19,7 +20,6 @@ export default function Search({ searchQuery }) {
         flexDirection: "column",
         alignItems: "center",
         minHeight: "100vh",
-        width:"100vw"
       }}
     >
       <Container>
@@ -28,9 +28,9 @@ export default function Search({ searchQuery }) {
         </Typography>
       </Container>
 
-      <Box sx={{ display: "flex", alignItems: "center", marginTop: 2 }}>
+      <Box sx={{ display: "flex", justifyContent: "center", marginTop: 2 }}>
         {searchResults.length > 0 ? (
-          <Grid container spacing={4} justifyContent="center" alignItems="center" >
+          <Grid container spacing={3}>
             {searchResults.map((movie) => (
               <MovieCard key={movie.id} movie={movie} />
             ))}
@@ -40,7 +40,11 @@ export default function Search({ searchQuery }) {
         )}
       </Box>
       
-      
+      {searchResults.length > 0 && (
+        <Stack>
+          <Pagination count={totalPages} page={page} onChange={handleChange} />
+        </Stack>
+      )}
     </Box>
   );
 }
