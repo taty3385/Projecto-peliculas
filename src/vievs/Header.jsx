@@ -1,4 +1,5 @@
-import { Link, Navigate } from "react-router-dom";
+
+import { Link } from "react-router-dom";
 import { styled, alpha } from "@mui/material/styles";
 import { AppBar, Box, Toolbar, IconButton, Typography, InputBase, Menu, MenuItem, Slide, Button, Badge,} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -151,7 +152,7 @@ export default function Header({searchQuery,handleSearchChange}) {
             </MenuItem>
           </Link>
           <Link to="/search">
-            <MenuItem>búsqueda</MenuItem>
+            <MenuItem onClick={handleClose}>búsqueda</MenuItem>
           </Link>
         </StyledMenu>
       </AppBar>
