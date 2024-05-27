@@ -1,5 +1,4 @@
 
-
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import {
@@ -25,17 +24,8 @@ import StarIcon from "@mui/icons-material/Star";
 export default function Detail() {
   const { idDetail } = useParams();
 
-  const {
-    getMovieDetail,
-    getGenreNames,
-    fetchGenres,
-    movieDetail,
-    trailerUrl,
-    handleClose,
-    open,
-    handleWatchTrailer,
-  } = useDetail();
-
+  const { getMovieDetail, getGenreNames, fetchGenres, movieDetail,
+    trailerUrl, handleClose, open, handleWatchTrailer,} = useDetail();
 
   useEffect(() => {
     getMovieDetail();
@@ -64,7 +54,7 @@ export default function Detail() {
           width: "100vw",
           height: "100%",
           backgroundColor: "rgba(0, 0, 0, 0.3)",
-        },
+      },
       }}
     >
       <Container sx={{ display: "flex", zIndex: 1 }}>
@@ -148,6 +138,7 @@ export default function Detail() {
             sx={{
               alignItems: "flex-start",
               height: "40px",
+            
             }}
             onClick={handleWatchTrailer}
           >
@@ -174,9 +165,9 @@ export default function Detail() {
                 position: "relative",
                 width: "100%",
                 height: 0,
-                paddingBottom: "56.25%", 
+                paddingBottom: "56.25%",
                 "@media (max-width: 870px)": {
-                  paddingBottom: "75%", 
+                  paddingBottom: "75%",
                 },
               }}
             >
