@@ -8,17 +8,38 @@ export default function Favorite() {
   const { favorites } = useContext(FavoriteContext);
   console.log(favorites);
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", minHeight: "100vh" }}>
-      <Box sx={{ flexGrow: 1 }}>
-        <Typography variant="h4" sx={{ marginBottom: 2 }}>Mis favoritos</Typography>
-        <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
-          {favorites?.length > 0 ? (
-            favorites.map((favorite) => (
-              <MovieCard key={favorite.id} movie={favorite} />
-            ))
-          ) : (
-            <Typography variant="body1">No hay favoritos seleccionados</Typography>
-          )}
+
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        minHeight: "100vh",
+        width: "90vw",
+      }}
+    >
+      <Typography variant="h4" sx={{ marginBottom: 2 }}>
+        Mis favoritos
+      </Typography>
+      {favorites?.length > 0 ? (
+        <Box
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "space-around",
+            gap: 2,
+            width: "100%",
+          }}
+        >
+          {favorites.map((favorite) => (
+            <MovieCard
+              key={favorite.id}
+              movie={favorite}
+              sx={{ margin: "auto" }} 
+            />
+          ))}
+
         </Box>
       </Box>
     </Box>
