@@ -60,7 +60,7 @@ export default function CarruselPlay() {
                       sm: "40vh",
                       md: "50vh",
                       lg: "56vh",
-                      "@media (max-width: 581px)": { height: "60vh" },
+                      "@media (max-width: 800px)": { height: "60vh" },
                     },
                     width: "100%",
                     objectPosition: "50% 30%",
