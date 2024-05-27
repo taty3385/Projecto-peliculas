@@ -4,12 +4,12 @@ import axios from "axios";
 export default function useSearch() {
   const [searchResults, setSearchResults] = useState([]);
   
- 
+  const [totalPages, setTotalPages] = useState(1);
 
-  const fetchMovies = async (query ) => {
+  const fetchMovies = async (query ,page=1) => {
     try {
       const response = await axios.get(
-        `https://api.themoviedb.org/3/search/movie?include_adult=false&query=${query}`,
+        `https://api.themoviedb.org/3/search/movie?include_adult=false&query=${query}&page=${page}`,
         {
           headers: {
             accept: "application/json",
@@ -18,8 +18,10 @@ export default function useSearch() {
         }
       );
       const data = response.data;
+
+
       setSearchResults(data.results);
-     
+      setTotalPages(data.total_pages);
     } catch (error) {
       console.error("Error fetching movies:", error);
     }
@@ -28,7 +30,7 @@ export default function useSearch() {
   return {
     searchResults,
     fetchMovies,
- 
+  totalPages,
   };
 }
 ``
