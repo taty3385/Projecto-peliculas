@@ -5,7 +5,7 @@ import MovieCard from "./MovieCard";
 
 export default function Favorite() {
   const { favorites } = useContext(FavoriteContext);
- 
+
   return (
     <Box
       sx={{
@@ -39,7 +39,7 @@ export default function Favorite() {
           ))}
         </Box>
       ) : (
-        <Typography variant="body1">No tienes favoritos aún.</Typography>
+        <Typography variant="body1">No hay favoritos seleccionados</Typography>
       )}
     </Box>
   );
