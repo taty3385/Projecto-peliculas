@@ -1,9 +1,10 @@
+
 import { useState } from "react";
 
 
 export default function useHeader() {
-  
   const [anchorEl, setAnchorEl] = useState(null);
+ 
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
@@ -18,11 +19,17 @@ export default function useHeader() {
     handleClose();
   };
 
+
+
+
+
+
   return {
     handleClick,
     handleClose,
     handleCategoryClick,
     anchorEl,
     open,
+
   };
 }

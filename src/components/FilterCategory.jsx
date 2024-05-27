@@ -1,19 +1,35 @@
 
 
 
-import { Container, Pagination, Stack, Typography } from '@mui/material';
+import { Container, Pagination, Stack, Typography, Grid, CircularProgress } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import useHome from '../hooks/useHome';
 import MovieCard from './MovieCard';
 import { useEffect } from 'react';
 
-export default function FilterCategory() {
+export default function FilterCategory({handleChange,page}) {
   const { type } = useParams();
-  const { movies, totalPage, page, handleChange,getAllMovies } = useHome();
+  const { movies, totalPage, getAllMovies } = useHome();
 
   useEffect(() => {
-    getAllMovies(type);
+    getAllMovies(type,page);
   }, [type, page]);
+
+  if (movies.length === 0) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "100vh",
+        
+        }}
+      >
+        <CircularProgress sx={{color:"red"}} />
+      </div>
+    );
+  }
 
   return (
     <Container>
@@ -28,9 +44,13 @@ export default function FilterCategory() {
           justifyContent: 'center',
         }}
       >
-        {movies.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} />
-        ))}
+        <Grid container spacing={3}>
+          {movies.map((movie) => (
+            <Grid item xs={12} sm={6} md={4} lg={3} key={movie.id}>
+              <MovieCard movie={movie} />
+            </Grid>
+          ))}
+        </Grid>
       </Container>
       {totalPage > 1 && (
         <Stack
@@ -45,4 +65,3 @@ export default function FilterCategory() {
     </Container>
   );
 }
-

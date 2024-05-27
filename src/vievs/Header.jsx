@@ -1,23 +1,17 @@
-
-import { Link} from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { styled, alpha } from "@mui/material/styles";
-import {
-  AppBar,
-  Box,
-  Toolbar,
-  IconButton,
-  Typography,
-  InputBase,
-  Menu,
-  MenuItem,
-  Slide,
-} from "@mui/material";
+import { AppBar, Box, Toolbar, IconButton, Typography, InputBase, Menu, MenuItem, Slide, Button, Badge,} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import useHeader from "../hooks/useHeader";
-;
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import { useNavigate } from 'react-router-dom';
+import { useContext, useEffect } from "react";
+import { FavoriteContext } from "../components/context/FavoriteContext";
 
-const Search = styled("div")(({ theme }) => ({
+
+
+const SearchWrapper = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
@@ -61,18 +55,28 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const StyledMenu = styled(Menu)(({ theme }) => ({
   "& .MuiPaper-root": {
     backgroundColor: "black",
-    color: "white", 
-    width: "20vw",
+    color: "white",
+    width: "30%",
     height: "100vh",
   },
 }));
 
-export default function Header() {
+export default function Header({searchQuery,handleSearchChange}) {
+  const navigate = useNavigate();
   const { handleClick, handleClose, handleCategoryClick, anchorEl, open } = useHeader();
- 
+ const { totalFavorite } = useContext(FavoriteContext);
+
+
+  useEffect(() => {
+    if (searchQuery.length > 0) {
+    navigate("/search");
+    } else {
+      navigate("/");
+    }
+  }, [searchQuery]);
 
   return (
-    <Box sx={{ width: "100vw" }}>
+    <Box sx={{ width: "100%" }}>
       <AppBar
         position="static"
         sx={{ color: "white", backgroundColor: "gray" }}
@@ -102,15 +106,24 @@ export default function Header() {
               Home
             </Typography>
           </Link>
-          <Search>
+          <SearchWrapper>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Buscar…"
               inputProps={{ "aria-label": "search" }}
+              value={searchQuery}
+              onChange={handleSearchChange}
             />
-          </Search>
+          </SearchWrapper>
+          <Link to={"/favorite"}>
+            <Button>
+              <Badge color="primary" badgeContent={totalFavorite()}>
+                <FavoriteIcon sx={{ color: "red" }} />
+              </Badge>
+            </Button>
+          </Link>
         </Toolbar>
         <StyledMenu
           id="basic-menu"
@@ -124,17 +137,21 @@ export default function Header() {
           anchorOrigin={{ vertical: "top", horizontal: "right" }}
           transformOrigin={{ vertical: "top", horizontal: "right" }}
         >
-          <MenuItem onClick={handleClose}>Buscar</MenuItem>
+          <Link to="/">
+            <MenuItem onClick={handleClose}>Home</MenuItem>
+          </Link>
           <Link to="category/now_playing">
-          <MenuItem onClick={() => handleCategoryClick("now_playing")}>
-            Últimos Lanzamientos
-          </MenuItem>
+            <MenuItem onClick={() => handleCategoryClick("now_playing")}>
+              Últimos Lanzamientos
+            </MenuItem>
           </Link>
           <Link to="category/popular">
-          <MenuItem onClick={() => handleCategoryClick("popular")}>
-
-            Populares
-          </MenuItem>
+            <MenuItem onClick={() => handleCategoryClick("popular")}>
+              Populares
+            </MenuItem>
+          </Link>
+          <Link to="/search">
+            <MenuItem>búsqueda</MenuItem>
           </Link>
         </StyledMenu>
       </AppBar>
