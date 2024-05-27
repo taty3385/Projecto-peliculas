@@ -1,76 +1,39 @@
-
 import { Link } from "react-router-dom";
-import { styled, alpha } from "@mui/material/styles";
-import { AppBar, Box, Toolbar, IconButton, Typography, InputBase, Menu, MenuItem, Slide, Button, Badge,} from "@mui/material";
+
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+  Typography,
+
+  MenuItem,
+  Slide,
+  Button,
+  Badge,
+} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import useHeader from "../hooks/useHeader";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { FavoriteContext } from "../components/context/FavoriteContext";
+import TrendingUpIcon from "@mui/icons-material/TrendingUp";
+import NewReleasesIcon from "@mui/icons-material/NewReleases";
+import HomeIcon from "@mui/icons-material/Home";
+import { SearchWrapper, SearchIconWrapper, StyledInputBase, StyledMenu } from "./styles"
 
 
-
-const SearchWrapper = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(1),
-    width: "auto",
-  },
-}));
-
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  width: "100%",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    [theme.breakpoints.up("sm")]: {
-      width: "12ch",
-      "&:focus": {
-        width: "20ch",
-      },
-    },
-  },
-}));
-
-const StyledMenu = styled(Menu)(({ theme }) => ({
-  "& .MuiPaper-root": {
-    backgroundColor: "black",
-    color: "white",
-    width: "30%",
-    height: "100vh",
-  },
-}));
-
-export default function Header({searchQuery,handleSearchChange}) {
+export default function Header({ searchQuery, handleSearchChange }) {
   const navigate = useNavigate();
-  const { handleClick, handleClose, handleCategoryClick, anchorEl, open } = useHeader();
- const { totalFavorite } = useContext(FavoriteContext);
-
+  const { handleClick, handleClose, handleCategoryClick, anchorEl, open } =
+    useHeader();
+  const { totalFavorite } = useContext(FavoriteContext);
 
   useEffect(() => {
     if (searchQuery.length > 0) {
-    navigate("/search");
+      navigate("/search");
     } else {
       navigate("/");
     }
@@ -131,28 +94,38 @@ export default function Header({searchQuery,handleSearchChange}) {
           anchorEl={anchorEl}
           open={open}
           onClose={handleClose}
+        
           MenuListProps={{
             "aria-labelledby": "basic-button",
+           
           }}
           TransitionComponent={Slide}
           anchorOrigin={{ vertical: "top", horizontal: "right" }}
           transformOrigin={{ vertical: "top", horizontal: "right" }}
         >
           <Link to="/">
-            <MenuItem onClick={handleClose}>Home</MenuItem>
+            <MenuItem onClick={handleClose}>
+              <HomeIcon />
+              Home
+            </MenuItem>
           </Link>
           <Link to="category/now_playing">
             <MenuItem onClick={() => handleCategoryClick("now_playing")}>
+              <NewReleasesIcon />
               Últimos Lanzamientos
             </MenuItem>
           </Link>
           <Link to="category/popular">
             <MenuItem onClick={() => handleCategoryClick("popular")}>
+              <TrendingUpIcon sx={{ marginRight: 1 }} />
               Populares
             </MenuItem>
           </Link>
           <Link to="/search">
-            <MenuItem onClick={handleClose}>búsqueda</MenuItem>
+            <MenuItem onClick={handleClose}>
+              <SearchIcon sx={{ marginRight: 1 }} />
+              Búsqueda
+            </MenuItem>
           </Link>
         </StyledMenu>
       </AppBar>
