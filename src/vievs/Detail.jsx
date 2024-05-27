@@ -1,5 +1,4 @@
 
-
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import {
@@ -36,6 +35,7 @@ export default function Detail() {
     handleWatchTrailer,
   } = useDetail();
 
+
   useEffect(() => {
     getMovieDetail();
     fetchGenres();
@@ -46,6 +46,7 @@ export default function Detail() {
       sx={{
         position: "relative",
         display: "flex",
+        flexWrap: "wrap",
         justifyContent: "center",
         alignItems: "center",
         minHeight: "100vh",
@@ -61,7 +62,7 @@ export default function Detail() {
           left: 0,
           width: "100vw",
           height: "100%",
-          backgroundColor: "rgba(0, 0, 0, 0.5)",
+          backgroundColor: "rgba(0, 0, 0, 0.3)",
         },
       }}
     >
@@ -69,8 +70,11 @@ export default function Detail() {
         <Card
           sx={{
             margin: "10px",
-            boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
-            width: "100vh",
+            boxShadow: "0 8px 50px -12px rgba(0,0,0,0.3)",
+            width: "50vw",
+            "@media (max-width: 940px)": {
+              display: "none",
+            },
           }}
         >
           <CardActionArea>
@@ -88,14 +92,22 @@ export default function Detail() {
           <Typography
             variant="h3"
             gutterBottom
-            sx={{ color: "#fff", textShadow: "2px 2px 4px rgba(0, 0, 0, 0.8)" }}
+            sx={{
+              color: "#fff",
+              textShadow: "2px 2px 4px rgba(0, 0, 0, 0.8)",
+              paddingBottom: 2,
+            }}
           >
             {movieDetail.title}
           </Typography>
           <Typography
             variant="body1"
             gutterBottom
-            sx={{ color: "#fff", textShadow: "1px 1px 2px rgba(0, 0, 0, 0.8)" }}
+            sx={{
+              color: "#fff",
+              textShadow: "1px 1px 2px rgba(0, 0, 0, 0.8)",
+              paddingBottom: 2,
+            }}
           >
             {movieDetail.overview}
           </Typography>
@@ -120,7 +132,6 @@ export default function Detail() {
                       }}
                     >
                       <StarIcon sx={{ color: "#fff", marginRight: 1 }} />{" "}
-                     
                       <ListItemText sx={{ color: "#fff" }}>
                         {genreName}
                       </ListItemText>
@@ -143,27 +154,45 @@ export default function Detail() {
           </Button>
         ) : null}
 
-        <Dialog open={open} onClose={handleClose} maxWidth="lg">
-          <DialogContent sx={{ position: "relative", padding: "0" }}>
+        <Dialog open={open} onClose={handleClose} maxWidth="lg" fullWidth>
+          <DialogContent sx={{ position: "relative", padding: 0 }}>
             <IconButton
               sx={{
                 position: "absolute",
-                top: "10px",
-                right: "10px",
+                top: 10,
+                right: 10,
                 color: "white",
+                zIndex: 1,
               }}
               onClick={handleClose}
             >
               <CloseIcon />
             </IconButton>
-            <iframe
-              width="800px"
-              height="500px"
-              src={trailerUrl}
-              allow="autoplay; encrypted-media"
-              allowFullScreen
-              title="Trailer"
-            />
+            <Box
+              sx={{
+                position: "relative",
+                width: "100%",
+                height: 0,
+                paddingBottom: "56.25%", 
+                "@media (max-width: 870px)": {
+                  paddingBottom: "75%", 
+                },
+              }}
+            >
+              <iframe
+                src={trailerUrl}
+                allow="autoplay; encrypted-media"
+                allowFullScreen
+                title="Trailer"
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                }}
+              />
+            </Box>
           </DialogContent>
         </Dialog>
       </Container>
