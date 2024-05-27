@@ -22,7 +22,7 @@ export default function useSearch() {
 
 
       setSearchResults(data.results);
-      setTotalPages(data.total_pages);
+    
     } catch (error) {
       console.error("Error fetching movies:", error);
     }
@@ -31,7 +31,6 @@ export default function useSearch() {
   return {
     searchResults,
     fetchMovies,
-   
-  };
+ };
 }
 ``
