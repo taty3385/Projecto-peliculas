@@ -15,6 +15,12 @@ export default function Home() {
     getTop10();
   }, []);
 
+  
+  useEffect(() => {
+  
+    getTop10();
+  }, []);
+
   const responsive = {
     421: { items: 2 },
     537: { items: 2 },
