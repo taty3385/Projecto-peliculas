@@ -1,4 +1,3 @@
-
 import Header from "./vievs/Header";
 import Footer from "./vievs/Footer";
 import Home from "./vievs/Home";
@@ -7,6 +6,10 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Detail from "./vievs/Detail";
 import Search from "./vievs/Search";
 import FavoriteContextProvider from "./components/context/FavoriteContext";
+import Error from "./components/Error";
+
+
+
 
 import { useState } from "react";
 function App() {
@@ -38,7 +41,7 @@ function App() {
           />
           <Route
             path="/search"
-            element={<Search searchQuery={searchQuery} page={page} />}
+            element={<Search searchQuery={searchQuery}  />}
           />
           <Route path="detail/:idDetail" element={<Detail />} />
           <Route path="*" element={<Error />} />

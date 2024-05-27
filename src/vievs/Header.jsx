@@ -1,24 +1,9 @@
-import { Link } from "react-router-dom";
-import {
-  AppBar,
-  Box,
-  Toolbar,
-  IconButton,
-  Typography,
-  MenuItem,
-  Slide,
-  Button,
-  Badge,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-} from "@mui/material";
+import { Link,useNavigate  } from "react-router-dom";
+import { AppBar, Box, Toolbar, IconButton, Typography, MenuItem, Slide, Button, Badge, Dialog, DialogTitle, DialogContent,DialogActions } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import useHeader from "../hooks/useHeader";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { FavoriteContext } from "../components/context/FavoriteContext";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";

@@ -28,8 +28,7 @@ export default function useHome() {
       const imagesData = {};
 
 
-
-      for (const movie of response.data.results) {
+     for (const movie of response.data.results) {
         const imageResponse = await axios.get(
           `https://api.themoviedb.org/3/movie/${movie.id}/images`,
           {

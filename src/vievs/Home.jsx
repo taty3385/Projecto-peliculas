@@ -17,10 +17,6 @@ export default function Home() {
   }, []);
 
   
-  useEffect(() => {
-  
-    getTop10();
-  }, []);
 
   const responsive = {
     421: { items: 2 },
@@ -65,8 +61,8 @@ export default function Home() {
 
     <Box>
       <CarruselPlay />
-      <Box sx={{ maxWidth: "100vw", margin: "5px",/* backgroundColor: "blue" */}}>
-        <Container sx={{ Width: "90vh",/* backgroundColor: "red"*/  }}>
+      <Box sx={{ maxWidth: "100vw", margin: "5px",}}>
+        <Container sx={{ Width: "90vh" }}>
         <Typography variant="h5" gutterBottom> Más populares</Typography>
           <AliceCarousel
             infinite
