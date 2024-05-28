@@ -19,8 +19,7 @@ import MovieCard from "../components/MovieCard";
 
 export default function Header({ searchQuery, handleSearchChange }) {
   const navigate = useNavigate();
-  const { handleClick, handleClose, handleCategoryClick, anchorEl, open } =
-    useHeader();
+  const { handleClick, handleClose, handleCategoryClick, anchorEl, open } = useHeader();
   const [modalOpen, setModalOpen] = useState(false);
   const { favorites, totalFavorite } = useContext(FavoriteContext);
 

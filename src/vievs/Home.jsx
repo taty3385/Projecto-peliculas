@@ -83,7 +83,7 @@ export default function Home() {
             ))}
           </AliceCarousel>
         </Container>
-        <Container sx={{ Width: "90vh", /*backgroundColor: "red"*/ }}>
+        <Container sx={{ Width: "90vh"}}>
         <Typography variant="h5" gutterBottom>  Top 10 más vistos</Typography>
           <AliceCarousel
             infinite
