@@ -24,7 +24,7 @@ export default function FilterCategory({ handleChange, page }) {
   if (movies.length === 0) {
     return (
       <Box
-        style={{
+        sx={{
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -38,7 +38,7 @@ export default function FilterCategory({ handleChange, page }) {
 
   return (
     <Box>
-      <Typography variant="h4" sx={{ textAlign: "center", marginTop: "5px" }}>
+      <Typography variant="h4" sx={{ textAlign: "center", marginTop: "5px" ,fontFamily:"Morina" }}>
         {type === "now_playing" ? "Últimos Lanzamientos" : "Populares"}
       </Typography>
       <Box

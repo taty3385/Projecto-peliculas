@@ -7,8 +7,7 @@ import Detail from "./vievs/Detail";
 import Search from "./vievs/Search";
 import FavoriteContextProvider from "./components/context/FavoriteContext";
 import Error from "./components/Error";
-
-
+import "./App.css"; 
 
 
 import { useState } from "react";

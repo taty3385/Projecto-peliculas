@@ -63,7 +63,7 @@ export default function Home() {
       <CarruselPlay />
       <Box sx={{ maxWidth: "100vw", margin: "5px",}}>
         <Container sx={{ Width: "90vh" }}>
-        <Typography variant="h5" gutterBottom> Más populares</Typography>
+        <Typography variant="h5" gutterBottom sx={{fontFamily:"Morina"}}> Más populares</Typography>
           <AliceCarousel
             infinite
             responsive={responsive}
@@ -84,7 +84,7 @@ export default function Home() {
           </AliceCarousel>
         </Container>
         <Container sx={{ Width: "90vh"}}>
-        <Typography variant="h5" gutterBottom>  Top 10 más vistos</Typography>
+        <Typography variant="h5" gutterBottom sx={{fontFamily:"Morina"}}>  Top 10 más vistos</Typography>
           <AliceCarousel
             infinite
             responsive={responsive}

@@ -60,7 +60,7 @@ export default function Header({ searchQuery, handleSearchChange }) {
               variant="h6"
               noWrap
               component="div"
-              sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+              sx={{ flexGrow: 1, display: { xs: "none", sm: "block",fontFamily:"Morina",  } }}
             >
               Home
             </Typography>
@@ -97,8 +97,8 @@ export default function Header({ searchQuery, handleSearchChange }) {
         >
           <Link to="/">
             <MenuItem onClick={handleClose}>
-              <HomeIcon />
-              Home
+              <HomeIcon  />
+             <Typography >home</Typography>
             </MenuItem>
           </Link>
           <Link to="category/now_playing">
