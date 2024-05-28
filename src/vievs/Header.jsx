@@ -9,12 +9,7 @@ import { FavoriteContext } from "../components/context/FavoriteContext";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import NewReleasesIcon from "@mui/icons-material/NewReleases";
 import HomeIcon from "@mui/icons-material/Home";
-import {
-  SearchWrapper,
-  SearchIconWrapper,
-  StyledInputBase,
-  StyledMenu,
-} from "./styles";
+import { SearchWrapper, SearchIconWrapper, StyledInputBase, StyledMenu,} from "./styles";
 import MovieCard from "../components/MovieCard";
 
 export default function Header({ searchQuery, handleSearchChange }) {
@@ -40,7 +35,7 @@ export default function Header({ searchQuery, handleSearchChange }) {
   }, [searchQuery]);
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ maxWidth: "100%" }}>
       <AppBar
         position="static"
         sx={{ color: "white", backgroundColor: "gray" }}

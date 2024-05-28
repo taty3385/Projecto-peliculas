@@ -47,13 +47,25 @@ export const StyledMenu = styled(Menu)(({ theme }) => ({
   "& .MuiPaper-root": {
     backgroundColor: alpha(theme.palette.grey[800], 0.8),
     color: "white",
-    width: "30%",
-    height: "100vh",
+    width: "20%",
+    height: "50vh",
   },
   "& .MuiMenuItem-root": {
-    color: "white", 
+    color: "white",
     "&:hover": {
       backgroundColor: alpha(theme.palette.common.white, 0.25),
+    },
+  },
+
+  "@media (max-width: 990px)": {
+    "& .MuiPaper-root": {
+      width: "30%",
+    },
+  },
+
+  "@media (max-width: 768px)": {
+    "& .MuiPaper-root": {
+      width: "40%",
     },
   },
 }));

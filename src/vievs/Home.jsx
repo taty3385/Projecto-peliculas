@@ -59,7 +59,7 @@ export default function Home() {
 
   return (
 
-    <Box>
+    <Box width="100%">
       <CarruselPlay />
       <Box sx={{ maxWidth: "100vw", margin: "5px",}}>
         <Container sx={{ Width: "90vh" }}>
@@ -77,9 +77,9 @@ export default function Home() {
             sx={{ width: "100%"}}
           >
             {movies.map((movie) => (
-              <div key={movie.id} sx={{ width: "50vw",margin: "0 auto" }}>
+              <Box key={movie.id} sx={{ width: "50vw",margin: "0 auto" }}>
                 <MovieCard movie={movie} />
-              </div>
+              </Box>
             ))}
           </AliceCarousel>
         </Container>
@@ -95,9 +95,9 @@ export default function Home() {
            disableDotsControls={true} 
           >
             {top10.map((movie) => (
-              <div key={movie.id} style={{ margin: "0 10px", width: "40vw" }}>
+              <Box key={movie.id} style={{ margin: "0 10px", width: "40vw" }}>
                 <MovieCard movie={movie} />
-              </div>
+              </Box>
             ))}
           </AliceCarousel>
         </Container>
@@ -109,3 +109,4 @@ export default function Home() {
 
   );
 }
+

@@ -23,7 +23,7 @@ export default function FilterCategory({ handleChange, page }) {
 
   if (movies.length === 0) {
     return (
-      <div
+      <Box
         style={{
           display: "flex",
           alignItems: "center",
@@ -32,7 +32,7 @@ export default function FilterCategory({ handleChange, page }) {
         }}
       >
         <CircularProgress sx={{ color: "red" }} />
-      </div>
+      </Box>
     );
   }
 
