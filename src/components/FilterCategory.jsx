@@ -1,4 +1,3 @@
-
 import {
   Pagination,
   Stack,
@@ -6,7 +5,6 @@ import {
   Grid,
   CircularProgress,
   Box,
-
 } from "@mui/material";
 import { useParams } from "react-router-dom";
 import useHome from "../hooks/useHome";
@@ -37,21 +35,28 @@ export default function FilterCategory({ handleChange, page }) {
   }
 
   return (
-    <Box>
-      <Typography variant="h4" sx={{ textAlign: "center", marginTop: "5px" ,fontFamily:"Morina" }}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+      }}
+    >
+      <Typography
+        variant="h4"
+        sx={{ textAlign: "center", marginTop: "5px", fontFamily: "Morina" }}
+      >
         {type === "now_playing" ? "Últimos Lanzamientos" : "Populares"}
       </Typography>
-      <Box
-        sx={{ marginTop: "30px", display: "flex", justifyContent: "center" }}
-      >
-        <Grid container spacing={0} justifyContent="center">
-          {movies.map((movie) => (
-            <Grid item key={movie.id} xs={6} sm={4} md={4} lg={3}>
-              <MovieCard movie={movie} />
-            </Grid>
-          ))}
-        </Grid>
-      </Box>
+
+      <Grid container spacing={2} justifyContent="center" alignItems="center" paddingLeft="25px">
+        {movies.map((movie) => (
+          <Grid item key={movie.id} xs={6} sm={4} md={4} lg={3}>
+            <MovieCard movie={movie} />
+          </Grid>
+        ))}
+      </Grid>
+
       {totalPage > 1 && (
         <Stack
           spacing={2}

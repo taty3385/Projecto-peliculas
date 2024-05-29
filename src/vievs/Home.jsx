@@ -59,7 +59,7 @@ export default function Home() {
 
   return (
 
-    <Box width="100%">
+    <Box width="100vw">
       <CarruselPlay />
       <Box sx={{ maxWidth: "100vw", margin: "5px",}}>
         <Container sx={{ Width: "90vh" }}>
