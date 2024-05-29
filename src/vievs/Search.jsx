@@ -1,5 +1,3 @@
-
-
 import React, { useEffect } from "react";
 import { Box, Container, Typography, Grid} from "@mui/material";
 import useSearch from "../hooks/useSeach";

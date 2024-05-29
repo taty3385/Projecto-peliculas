@@ -9,10 +9,10 @@ const FavoriteContextProvider = ({ children }) => {
     return favoriteLs 
   });
 
-  // Actualizar el localStorage cuando los favoritos cambien
+ 
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
-  }, [favorites]); // Agregar "favorites" como dependencia
+  }, [favorites]); 
 
   const addFavorite = (newfavorite) => {
     setFavorites([...favorites, newfavorite]);

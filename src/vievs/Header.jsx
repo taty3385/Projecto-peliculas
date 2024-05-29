@@ -1,83 +1,41 @@
-
-import { Link } from "react-router-dom";
-import { styled, alpha } from "@mui/material/styles";
-import { AppBar, Box, Toolbar, IconButton, Typography, InputBase, Menu, MenuItem, Slide, Button, Badge,} from "@mui/material";
+import { Link,useNavigate  } from "react-router-dom";
+import { AppBar, Box, Toolbar, IconButton, Typography, MenuItem, Slide, Button, Badge, Dialog, DialogTitle, DialogContent,DialogActions } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import useHeader from "../hooks/useHeader";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { useNavigate } from 'react-router-dom';
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FavoriteContext } from "../components/context/FavoriteContext";
+import TrendingUpIcon from "@mui/icons-material/TrendingUp";
+import NewReleasesIcon from "@mui/icons-material/NewReleases";
+import HomeIcon from "@mui/icons-material/Home";
+import { SearchWrapper, SearchIconWrapper, StyledInputBase, StyledMenu,} from "./styles";
+import MovieCard from "../components/MovieCard";
 
-
-
-const SearchWrapper = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(1),
-    width: "auto",
-  },
-}));
-
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  width: "100%",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    [theme.breakpoints.up("sm")]: {
-      width: "12ch",
-      "&:focus": {
-        width: "20ch",
-      },
-    },
-  },
-}));
-
-const StyledMenu = styled(Menu)(({ theme }) => ({
-  "& .MuiPaper-root": {
-    backgroundColor: "black",
-    color: "white",
-    width: "30%",
-    height: "100vh",
-  },
-}));
-
-export default function Header({searchQuery,handleSearchChange}) {
+export default function Header({ searchQuery, handleSearchChange }) {
   const navigate = useNavigate();
   const { handleClick, handleClose, handleCategoryClick, anchorEl, open } = useHeader();
- const { totalFavorite } = useContext(FavoriteContext);
+  const [modalOpen, setModalOpen] = useState(false);
+  const { favorites, totalFavorite } = useContext(FavoriteContext);
 
+  const handleModalOpen = () => {
+    setModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setModalOpen(false);
+  };
 
   useEffect(() => {
     if (searchQuery.length > 0) {
-    navigate("/search");
+      navigate("/search");
     } else {
       navigate("/");
     }
   }, [searchQuery]);
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ maxWidth: "100%" }}>
       <AppBar
         position="static"
         sx={{ color: "white", backgroundColor: "gray" }}
@@ -102,7 +60,7 @@ export default function Header({searchQuery,handleSearchChange}) {
               variant="h6"
               noWrap
               component="div"
-              sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+              sx={{ flexGrow: 1, display: { xs: "none", sm: "block",fontFamily:"Morina",  } }}
             >
               Home
             </Typography>
@@ -118,13 +76,12 @@ export default function Header({searchQuery,handleSearchChange}) {
               onChange={handleSearchChange}
             />
           </SearchWrapper>
-          <Link to={"/favorite"}>
-            <Button>
-              <Badge color="primary" badgeContent={totalFavorite()}>
-                <FavoriteIcon sx={{ color: "red" }} />
-              </Badge>
-            </Button>
-          </Link>
+
+          <Button onClick={handleModalOpen}>
+            <Badge color="primary" badgeContent={totalFavorite()}>
+              <FavoriteIcon sx={{ color: "red" }} />
+            </Badge>
+          </Button>
         </Toolbar>
         <StyledMenu
           id="basic-menu"
@@ -139,23 +96,80 @@ export default function Header({searchQuery,handleSearchChange}) {
           transformOrigin={{ vertical: "top", horizontal: "right" }}
         >
           <Link to="/">
-            <MenuItem onClick={handleClose}>Home</MenuItem>
+            <MenuItem onClick={handleClose}>
+              <HomeIcon  />
+             <Typography >home</Typography>
+            </MenuItem>
           </Link>
           <Link to="category/now_playing">
             <MenuItem onClick={() => handleCategoryClick("now_playing")}>
+              <NewReleasesIcon />
               Últimos Lanzamientos
             </MenuItem>
           </Link>
           <Link to="category/popular">
             <MenuItem onClick={() => handleCategoryClick("popular")}>
+              <TrendingUpIcon sx={{ marginRight: 1 }} />
               Populares
             </MenuItem>
           </Link>
           <Link to="/search">
-            <MenuItem onClick={handleClose}>búsqueda</MenuItem>
+            <MenuItem onClick={handleClose}>
+              <SearchIcon sx={{ marginRight: 1 }} />
+              Búsqueda
+            </MenuItem>
           </Link>
         </StyledMenu>
       </AppBar>
+      <Box  >
+      <Dialog
+        open={modalOpen}
+        onClose={handleModalClose}
+        fullWidth
+        maxWidth="md"
+        PaperProps={{
+          sx: {
+       
+            backgroundColor: "rgba(255, 255, 255, 0.5)" 
+         
+          }
+        }}
+        
+      >
+        
+        <DialogTitle textAlign="center" sx={{ color: "black",fontSize: "24px" }} >Mis Favoritos</DialogTitle>
+        <DialogContent>
+          {favorites?.length > 0 ? (
+            <Box
+              sx={{
+                display: "flex",
+                flexWrap: "wrap",
+                justifyContent: "space-around",
+                gap: 2,
+                width: "100%",
+              }}
+            >
+              {favorites.map((favorite) => (
+                <MovieCard
+                  key={favorite.id}
+                  movie={favorite}
+                  sx={{ margin: "auto" }}
+                />
+              ))}
+            </Box>
+          ) : (
+            <Typography variant="body1">
+              No hay favoritos seleccionados
+            </Typography>
+          )}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleModalClose} color="primary" sx={{ color: "black" }}>
+            Cerrar
+          </Button>
+        </DialogActions>
+      </Dialog>
+      </Box>
     </Box>
   );
 }
