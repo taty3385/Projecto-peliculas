@@ -47,5 +47,5 @@ Esta aplicación web de películas permite a los usuarios navegar y descubrir pe
 - Node.js
 - Cuenta en The Movie Database API para obtener una clave API
 
-El proyecto está desplegado en Vercel. Puedes acceder a él [aquí](https://vercel.com/tamaras-projects-a807a3db/projecto-peliculas-ep71).
+El proyecto está desplegado en Vercel. Puedes acceder a él [aquí](https://projecto-peliculas-three.vercel.app).
 
