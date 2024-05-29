@@ -17,7 +17,7 @@ export default function Favorite() {
         width: "90vw",
       }}
     >
-      <Typography variant="h4" sx={{ marginBottom: 2 }}>
+      <Typography variant="h2" sx={{ marginBottom: 2, fontSize: "100px" }}>
         Mis favoritos
       </Typography>
       {favorites?.length > 0 ? (
@@ -44,3 +44,4 @@ export default function Favorite() {
     </Box>
   );
 }
+
