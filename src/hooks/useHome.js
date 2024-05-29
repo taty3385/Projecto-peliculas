@@ -61,6 +61,7 @@ export default function useHome() {
       console.error("Error fetching top 10 movies:", error);
     }
   };
+ 
 
   return {
     getAllMovies,
@@ -69,5 +70,6 @@ export default function useHome() {
     totalPage,
     getTop10,
     top10,
+    
   };
 }

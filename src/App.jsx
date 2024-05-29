@@ -7,21 +7,15 @@ import Detail from "./vievs/Detail";
 import Search from "./vievs/Search";
 import FavoriteContextProvider from "./components/context/FavoriteContext";
 import Error from "./components/Error";
-import "./App.css"; 
-
+import "./App.css";
 
 import { useState } from "react";
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [page, setPage] = useState(1);
 
   const handleSearchChange = (event) => {
     const { value } = event.target;
     setSearchQuery(value);
-  };
-
-  const handleChange = (event, value) => {
-    setPage(value);
   };
 
   return (
@@ -34,16 +28,14 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
-          <Route
-            path="/category/:type"
-            element={<FilterCategory page={page} handleChange={handleChange} />}
-          />
+          <Route path="/category/:type" element={<FilterCategory />} />
+
           <Route
             path="/search"
-            element={<Search searchQuery={searchQuery}  />}
+            element={<Search searchQuery={searchQuery} />}
           />
           <Route path="detail/:idDetail" element={<Detail />} />
-          <Route path="*" element={<Error />} />
+          <Route path="/*" element={<Error />} />
         </Routes>
         <Footer />
       </BrowserRouter>

@@ -38,7 +38,7 @@ export default function Home() {
       }}
       disabled={isDisabled}
     >
-      <ArrowBackIos />
+      <ArrowBackIos sx={{color:"red"}} />
     </IconButton>
   );
 
@@ -53,7 +53,7 @@ export default function Home() {
       }}
       disabled={isDisabled}
     >
-      <ArrowForwardIos />
+      <ArrowForwardIos sx={{color:"red"}} />
     </IconButton>
   );
 
