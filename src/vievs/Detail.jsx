@@ -87,6 +87,7 @@ export default function Detail() {
               color: "#fff",
               textShadow: "2px 2px 4px rgba(0, 0, 0, 0.8)",
               paddingBottom: 2,
+              fontFamily:"Morina",
             }}
           >
             {movieDetail.title}

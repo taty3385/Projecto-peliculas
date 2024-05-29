@@ -59,11 +59,11 @@ export default function Home() {
 
   return (
 
-    <Box>
+    <Box width="100%">
       <CarruselPlay />
       <Box sx={{ maxWidth: "100vw", margin: "5px",}}>
         <Container sx={{ Width: "90vh" }}>
-        <Typography variant="h5" gutterBottom> Más populares</Typography>
+        <Typography variant="h5" gutterBottom sx={{fontFamily:"Morina"}}> Más populares</Typography>
           <AliceCarousel
             infinite
             responsive={responsive}
@@ -77,14 +77,14 @@ export default function Home() {
             sx={{ width: "100%"}}
           >
             {movies.map((movie) => (
-              <div key={movie.id} sx={{ width: "50vw",margin: "0 auto" }}>
+              <Box key={movie.id} sx={{ width: "50vw",margin: "0 auto" }}>
                 <MovieCard movie={movie} />
-              </div>
+              </Box>
             ))}
           </AliceCarousel>
         </Container>
         <Container sx={{ Width: "90vh"}}>
-        <Typography variant="h5" gutterBottom>  Top 10 más vistos</Typography>
+        <Typography variant="h5" gutterBottom sx={{fontFamily:"Morina"}}>  Top 10 más vistos</Typography>
           <AliceCarousel
             infinite
             responsive={responsive}
@@ -95,9 +95,9 @@ export default function Home() {
            disableDotsControls={true} 
           >
             {top10.map((movie) => (
-              <div key={movie.id} style={{ margin: "0 10px", width: "40vw" }}>
+              <Box key={movie.id} style={{ margin: "0 10px", width: "40vw" }}>
                 <MovieCard movie={movie} />
-              </div>
+              </Box>
             ))}
           </AliceCarousel>
         </Container>
@@ -109,3 +109,4 @@ export default function Home() {
 
   );
 }
+

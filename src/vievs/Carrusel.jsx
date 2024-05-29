@@ -8,6 +8,7 @@ import {
   CircularProgress,
 } from "@mui/material";
 import useHome from "../hooks/useHome";
+import { Link } from "react-router-dom"
 
 export default function CarruselPlay() {
   const { getAllMovies, movies, movieImages } = useHome();
@@ -16,40 +17,28 @@ export default function CarruselPlay() {
     getAllMovies("now_playing");
   }, []);
 
-  if (movies.length === 0) {
-    return (
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "60vh",
-        }}
-      >
-        <CircularProgress sx={{ color: "red" }} />
-      </Box>
-    );
-  }
+
 
   return (
     <Box
-      className="carrusel"
-      sx={{
-        height: "60vh",
-        width: "100%",
-      }}
+    className="carrusel"
+    sx={{
+      height: "60vh",
+      width: "100%",
+    }}
+  >
+    <Carousel
+      autoPlay
+      infiniteLoop
+      interval={3000}
+      showStatus={false}
+      showThumbs={false}
+      showArrows
+      emulateTouch
     >
-      <Carousel
-        autoPlay
-        infiniteLoop
-        interval={3000}
-        showStatus={false}
-        showThumbs={false}
-        showArrows
-        emulateTouch
-      >
-        {movies.map((movie) => (
-          <div key={movie.id}>
+      {movies.map((movie) => (
+        <Box key={movie.id}>
+          <Link to={`/detail/${movie.id}`}>
             <CardActionArea>
               {movieImages[movie.id] && movieImages[movie.id].length > 0 ? (
                 <CardMedia
@@ -66,18 +55,33 @@ export default function CarruselPlay() {
                     objectPosition: "50% 30%",
                     objectFit: "cover",
                   }}
-                  image={`https://image.tmdb.org/t/p/original${
-                    movieImages[movie.id][0].file_path
-                  }`}
+                  image={`https://image.tmdb.org/t/p/original${movieImages[movie.id][0].file_path}`}
                   alt={movie.title}
                 />
               ) : (
-                <p>No image available</p>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: {
+                      xs: "30vh",
+                      sm: "40vh",
+                      md: "50vh",
+                      lg: "56vh",
+                      "@media (max-width: 800px)": { height: "60vh" },
+                    },
+                    width: "100%",
+                  }}
+                >
+                  <CircularProgress sx={{ color: "gray" }} />
+                </Box>
               )}
             </CardActionArea>
-          </div>
-        ))}
-      </Carousel>
-    </Box>
+          </Link>
+        </Box>
+      ))}
+    </Carousel>
+  </Box>
   );
 }
